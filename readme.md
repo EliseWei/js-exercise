@@ -1,6 +1,5 @@
 
-_Given an empty HTML document, use raw JS (and optionally some CSS) to..._
-
+_Given an empty HTML document, use raw JS (and optionally some CSS) to..._  
 **Reminder: Inspection tools are your friend.**
 
 ###Set 1
