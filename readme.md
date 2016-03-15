@@ -9,9 +9,9 @@ _Given an empty HTML document, use raw JS (and optionally some CSS) to..._
   * positioning
   * top and left coordinates
   * background color expressed as rgba
-2. write a function "buildBox" that creates and inserts that div on the page and assigns it to a variable.
+2. write a function "buildBox" that creates and inserts that div on the page and returns it.
 3. write a function "randInRange" that generates a random integer, given a range of possible values (min & max).
-4. write a function "setStyles" that accepts an element and sets all numerical CSS properties to random values within logically derived ranges.
+4. write a function "setStyles" that accepts an element and sets width, height, top, left, and the color to random values. Use _logically derived_ ranges for the top and left.
 
 ###Set 2
 5. using setTimeout, run setStyles on the box once every second, continuously. Ok, then turn it off.
