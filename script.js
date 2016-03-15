@@ -16,6 +16,7 @@ function randInRange(min, max) {
 	return Math.floor(Math.random()*range)+min;
 }
 
+var repeater;
 // write a function "setStyles" that accepts an element and sets all numerical CSS properties to random values within logically derived ranges.
 function setStyles(element) {
 	var windowWidth = window.innerWidth,
@@ -30,6 +31,10 @@ function setStyles(element) {
 	element.style.left = randInRange(0,leftMax) + 'px';
 	element.style.top = randInRange(0,topMax) + 'px';
 	element.style.backgroundColor = 'rgba(' + randInRange(0,256) + ',' + randInRange(0,256) + ',' + randInRange(0,256) + ',' + Math.random() + ')';
-}
 
-buildBox();
+	// using setTimeout, run setStyles on the box once every second, continuously
+	// to turnoff, use clearTimeout(repeater)
+	repeater = setTimeout(function(){
+		setStyles(element);
+	},1000);
+}
