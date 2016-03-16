@@ -52,9 +52,7 @@ var mainDiv = buildBox(),
 
 // create a new loop that smoothly animates the position of the box, moving it 60 times per second
 function moveBox(element) {
-    if (leftPos > leftMax || leftPos < 0 || topPos > topMax || topPos < 0) {
-        clearTimeout(moveRepeat);
-    } else {
+    if (leftPos < leftMax && leftPos > 0 && topPos < topMax && topPos > 0) {
         leftPos += x; 
         topPos += y; 
         element.style.left = leftPos + 'px'; 
