@@ -1,5 +1,8 @@
 // Set 1
 
+var windowWidth = window.innerWidth,
+	windowHeight = window.innerHeight;
+
 // create a buildBox function
 function buildBox() {
 	// create and insert an empty div on the page with: positioning, top and left coordinates, background color expressed as rgba 
@@ -7,6 +10,8 @@ function buildBox() {
 	div.style.position = 'absolute';
 	setStyles(div);
 	document.body.appendChild(div);
+
+	moveBox(div);
 	return div;
 }
 
@@ -15,13 +20,9 @@ function randInRange(min, max) {
 	var range = max-min;
 	return Math.floor(Math.random()*range)+min;
 }
-
-var repeater;
 // write a function "setStyles" that accepts an element and sets all numerical CSS properties to random values within logically derived ranges.
 function setStyles(element) {
-	var windowWidth = window.innerWidth,
-		windowHeight = window.innerHeight,
-		divWidth = randInRange(1,600),
+	var divWidth = randInRange(1,600),
 		divHeight = randInRange(1,500),
 		leftMax = windowWidth - divWidth,
 		topMax = windowHeight - divHeight;
@@ -33,8 +34,36 @@ function setStyles(element) {
 	element.style.backgroundColor = 'rgba(' + randInRange(0,256) + ',' + randInRange(0,256) + ',' + randInRange(0,256) + ',' + Math.random() + ')';
 
 	// using setTimeout, run setStyles on the box once every second, continuously
-	// to turnoff, use clearTimeout(repeater)
-	repeater = setTimeout(function(){
+	/*var repeater = setTimeout(function(){
 		setStyles(element);
-	},1000);
+	},1000);*/
 }
+
+// create a new loop that smoothly animates the position of the box, moving it 60 times per second
+function moveBox(element) {
+    var leftPos = 0,
+    	topPos = 0,
+		divWidth = element.offsetWidth,
+		divHeight = element.offsetHeight,
+		leftMax = windowWidth - divWidth,
+		topMax = windowHeight - divHeight,
+		velocity = 1000/60;
+
+    leftPos += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+    topPos += (element.offsetTop - element.scrollTop + element.clientTop);
+
+    if (leftPos == leftMax || topPos == topMax) {
+        clearTimeout(moveRepeat);
+    } else {
+        leftPos++; 
+        topPos++; 
+        element.style.left = leftPos + 'px'; 
+        element.style.top = topPos + 'px';
+    }
+
+	var moveRepeat = setTimeout(function(){
+		moveBox(element);
+	},velocity);
+}
+
+buildBox();
