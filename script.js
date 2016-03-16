@@ -22,8 +22,8 @@ function randInRange(min, max) {
 }
 // write a function "setStyles" that accepts an element and sets all numerical CSS properties to random values within logically derived ranges.
 function setStyles(element) {
-	var divWidth = randInRange(1,windowWidth),
-		divHeight = randInRange(1,windowHeight),
+	var divWidth = randInRange(1,Math.min(500,windowWidth)),
+		divHeight = randInRange(1,Math.min(500,windowHeight)),
 		leftMax = windowWidth - divWidth,
 		topMax = windowHeight - divHeight;
 
@@ -44,15 +44,14 @@ var mainDiv = buildBox(),
 	divHeight = mainDiv.offsetHeight,
 	leftMax = windowWidth - divWidth,
 	topMax = windowHeight - divHeight,
+	leftPos = mainDiv.offsetLeft,
+	topPos = mainDiv.offsetTop,
 	frameRate = 1000/60,
 	x = randInRange(-5,5),
 	y = randInRange(-5,5); 
 
 // create a new loop that smoothly animates the position of the box, moving it 60 times per second
 function moveBox(element) {
-    var leftPos = element.offsetLeft;
-    	topPos = element.offsetTop;
-
     if (leftPos > leftMax || leftPos < 0 || topPos > topMax || topPos < 0) {
         clearTimeout(moveRepeat);
     } else {
