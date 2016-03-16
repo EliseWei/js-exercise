@@ -47,10 +47,14 @@ function moveBox(element) {
 		divHeight = element.offsetHeight,
 		leftMax = windowWidth - divWidth,
 		topMax = windowHeight - divHeight,
-		velocity = 1000/60;
+		velocity = randInRange(0,15); // randomize velocity
 
     leftPos += (element.offsetLeft - element.scrollLeft + element.clientLeft);
     topPos += (element.offsetTop - element.scrollTop + element.clientTop);
+
+    var moveRepeat = setTimeout(function(){
+    	moveBox(element);
+    }, velocity);
 
     if (leftPos == leftMax || topPos == topMax) {
         clearTimeout(moveRepeat);
@@ -61,9 +65,6 @@ function moveBox(element) {
         element.style.top = topPos + 'px';
     }
 
-	var moveRepeat = setTimeout(function(){
-		moveBox(element);
-	},velocity);
 }
 
 buildBox();
